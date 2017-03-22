@@ -1,12 +1,17 @@
-'use strict';
-/*eslint-env node*/
-var testsContext;
+var chai = require('chai');
+var chaiAsPromised = require('chai-as-promised');
 
-require('babel-polyfill');
-require('angular');
-require('angular-mocks');
-require('./client/components/ui-router/ui-router.mock');
+chai.use(chaiAsPromised);
+var expect = chai.expect;
 
+describe('Protractor Demo App', function() {
+    beforeEach(function() {
+      return browser.ignoreSynchronization = true;
+    });
 
-testsContext = require.context('./client', true, /\.spec\.js$/);
-testsContext.keys().forEach(testsContext);
+    it('should have a title', function() {
+      browser.get('http://www.zappos.com/');
+
+      expect(browser.getTitle()).to.eventually.contain('Zappos');
+    });
+});
