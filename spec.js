@@ -12,6 +12,6 @@ describe('Protractor Demo App', function() {
     it('should have a title', function() {
       browser.get('http://www.zappos.com/');
 
-      expect(browser.getTitle()).to.eventually.contain('Zappos');
+      expect(browser.getTitle()).to.eventually.contain('zappos');
     });
 });
