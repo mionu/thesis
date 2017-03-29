@@ -1,5 +1,25 @@
 module.exports = class HomePageDesktop {
-    expectedTitle = 'Zappos.com';
-    categoriesNavigation = element(by.id('nav'));
-    brandIndex = element(by.id('azBrandIndex'));
+    get expectedTitle() {
+        return 'Zappos.com';
+    }
+
+    constructor() {
+        this.expandableCategories = element.all(by.css('#nav > li'));
+        this.brandIndex = element(by.id('azBrandIndex'));
+    }
+
+    getPageElements() {
+        return [
+            this.expandableCategories,
+            this.brandIndex
+        ];
+    }
+
+    expandCategory(category) {
+        return browser.actions().mouseMove(category).perform();
+    }
+
+    getSubcategory(category) {
+        return category.$('.sub-nav');
+    }
 }

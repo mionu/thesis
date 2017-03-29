@@ -12,7 +12,9 @@
     "mocha": "^3.2.0"
   },
   "scripts": {
-    "e2e": "protractor conf.js"
+    "e2e": "protractor protractor.desktop.conf.js && protractor protractor.mobile.conf.js",
+    "e2e-desktop": "protractor protractor.desktop.conf.js",
+    "e2e-mobile": "protractor protractor.mobile.conf.js"
   },
   "author": "mionu",
   "license": "ISC"

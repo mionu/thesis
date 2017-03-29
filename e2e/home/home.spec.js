@@ -5,17 +5,37 @@ const factory = require('../factory');
 chai.use(chaiAsPromised);
 const expect = chai.expect;
 
-const config = browser.params;
+let page;
 
-describe('Home #common', () => {
+describe('Home Page', () => {
+    before(() => {
+        browser.executeScript('return navigator.userAgent').then((userAgent) => {
+            page = factory('home', userAgent);
+        });
+    })
+
     beforeEach(() => {
       browser.ignoreSynchronization = true;
       browser.get('');
     });
 
-    it('should have a title', () => {
-      expect(browser.getTitle()).to.eventually.match(/zappos/i);
-      console.log(config);
+    it.skip('should have a title #common', () => {
+        expect(browser.getTitle()).to.eventually.contain(page.expectedTitle);
     });
+
+    it('should have expandable navigation #desktop', () => {
+        page.expandableCategories.each((category, index) => {
+            page.expandCategory(category).then(() => {
+                const shouldHaveSubcategory = index < 5 || index === 9;
+                expect(page.getSubcategory(category).isPresent()).to.eventually.equal(shouldHaveSubcategory);
+            });
+        });
+    });
+
+    it('should expand categories #mobile', () => {
+        page.moreButton.click();
+        browser.sleep(5000);
+    })
+
 });
 
