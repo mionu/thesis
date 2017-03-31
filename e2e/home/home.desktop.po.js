@@ -4,22 +4,22 @@ module.exports = class HomePageDesktop {
     }
 
     constructor() {
-        this.expandableCategories = element.all(by.css('#nav > li'));
-        this.brandIndex = element(by.id('azBrandIndex'));
+        this.expandableCategories = element.all(by.xpath('//nav[contains(@class,"nav")]//li[contains(@class,"nav-")]'));
+        // this.brandIndex = element(by.id('azBrandIndex'));
     }
 
     getPageElements() {
         return [
             this.expandableCategories,
-            this.brandIndex
+            // this.brandIndex
         ];
     }
 
     expandCategory(category) {
-        return browser.actions().mouseMove(category).perform();
+        return category.click();
     }
 
     getSubcategory(category) {
-        return category.$('.sub-nav');
+        return category.$('.category');
     }
 }

@@ -1,15 +1,19 @@
+const categoriesXpath = '//main[contains(@class,"mdl-layout__content")]//h6/following-sibling::';
+
 module.exports = class HomePageMobile {
     get expectedTitle() {
         return 'zappos.com';
     }
 
     constructor() {
-        this.moreButton = element(by.xpath('//main[@id="mainContent"]/div/div/div[1]/div[1]//button'));
+        this.moreButtonsForCategories = element.all(by.xpath(`${categoriesXpath}button`));
+        this.categories = element.all(by.xpath(`${categoriesXpath}div`));
     }
 
     getPageElements() {
         return [
-            this.expandableCategories
+            this.moreButtonsForCategories,
+            this.categories
         ];
     }
 }

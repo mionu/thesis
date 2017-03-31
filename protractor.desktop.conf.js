@@ -1,3 +1,5 @@
+// const { DESKTOP_USER_AGENT } = require('./e2e/constants');
+
 const date = new Date().toLocaleDateString('en-US', {
     day: '2-digit',
     month: '2-digit',
@@ -19,5 +21,8 @@ exports.config = {
     capabilities: {
         browserName: 'chrome',
         name: 'Desktop',
+        // chromeOptions: {
+        //     args: [`user-agent=${DESKTOP_USER_AGENT}`]
+        // },
     },
 }
