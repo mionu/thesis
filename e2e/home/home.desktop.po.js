@@ -5,14 +5,16 @@ module.exports = class HomePageDesktop {
 
     constructor() {
         this.expandableCategories = element.all(by.xpath('//nav[contains(@class,"nav")]//li[contains(@class,"nav-")]'));
-        // this.brandIndex = element(by.id('azBrandIndex'));
     }
 
     getPageElements() {
         return [
             this.expandableCategories,
-            // this.brandIndex
         ];
+    }
+
+    isCategoryExpandable(index) {
+        return index < 5;
     }
 
     expandCategory(category) {
@@ -21,5 +23,9 @@ module.exports = class HomePageDesktop {
 
     getSubcategory(category) {
         return category.$('.category');
+    }
+
+    getSubcategoryCloseIcon(category) {
+        return category.$('a[data-close]');
     }
 }
